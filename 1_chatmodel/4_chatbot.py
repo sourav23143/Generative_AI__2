@@ -5,7 +5,7 @@
 
 # from langchain_mistralai import ChatMistralAI
 
-# model = ChatMistralAI(model="mistral-small-2603", temperature=0.9)  #means it will generate only 20 tokens in response
+# model = ChatMistralAI(model="mistral-small-2603", temperature=0.9)  
 
 
 # messages = [
@@ -243,3 +243,8 @@ while True:
     print("Bot :",response.content)
 
 print(messages)
+
+
+#------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#WE have done this but we can also implement this by using implementation by using PROMPT TEMPLATE

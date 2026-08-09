@@ -81,6 +81,7 @@ from dotenv import load_dotenv
 # from langchain_core.prompts import PromptTemplate
 #IF WE ARE USING BASIC LLM THEN WE CAN WRITE PromptTemplate , BUT IF WE ARE USING THAT ISTSELF IS CHAT MODEL THAN BEFORE PROMPT WE CAN
 #WRITE ChatPromptTemplate
+import sys
 from langchain_core.prompts import ChatPromptTemplate
 from pydantic import BaseModel
 
@@ -118,6 +119,7 @@ class Movie(BaseModel):
 #so we have to create a teacher who will check these
 #For checking we have Pydantic Parser(PydanticOutputParser)
 
+from langchain_core.exceptions import OutputParserException
 from langchain_core.output_parsers import PydanticOutputParser
 #(that mean we can also use Pydantic inside langchain)
 
@@ -150,7 +152,10 @@ Extract movie information from the paragraph
 #to put info in {paragraph} > we need to call > ChatPromptTemplate.from_messages
 
 
-para = input("Give your Paragraph :")
+
+
+
+para = int(input("Give your Paragraph :"))
 
 
 
@@ -167,8 +172,16 @@ response = model.invoke(final_prompt)
 #since we are able to inkove this prompt thats way this thing is known as runnable(chains)
 
 ##SO response = model.invoke(final_prompt) WILL GIVE MODEL RAW OUTPUTS , BUT TO GET STRUCTURED OUTPUTWE HAVE MAKE RESONSE CONTENT MORE FINE
-movie_data = parser.parse(response.content)
-print(response.content)  
+try:
+    movie_data = parser.parse(response.content)  #Parse the output of an LLM call to a Pydantic object.
+except OutputParserException:
+    print("The model response could not be converted into the Movie schema.")
+    print("Raw model output:")
+    print(response.content)
+    sys.exit(1)
+
+# print(response.content)
+print(movie_data.model_dump_json(indent=2))  #print clean JSON output
 
 
 
@@ -176,7 +189,8 @@ print(response.content)
 
 #outputs >> 
 
-# Give your Paragraph :Inception is a mind-bending science fiction thriller directed by Christopher Nolan. Released in 2010,
+# Give your Paragraph :
+# Inception is a mind-bending science fiction thriller directed by Christopher Nolan. Released in 2010,
 #  the film stars Leonardo DiCaprio, Joseph Gordon-Levitt, Ellen Page, Tom Hardy, and Ken Watanabe. The story follows Dom Cobb, 
 # a skilled thief who specializes in stealing valuable information by entering people's dreams. He is given a challenging mission to 
 # plant an idea into someone's mind through a process known as inception. The movie was widely praised for its unique concept, 
@@ -202,3 +216,26 @@ print(response.content)
 
 
 #SO response = model.invoke(final_prompt) WILL GIVE MODEL RAW OUTPUTS , BUT TO GET STRUCTURED OUTPUTWE HAVE MAKE RESONSE CONTENT MORE FINE
+
+
+
+
+
+# Give your Paragraph :Inception is a mind-bending science fiction thriller directed by Christopher Nolan. Released in 2010, the film starsLeonardo DiCaprio, Joseph Gordon-Levitt, Ellen Page, Tom Hardy, and Ken Watanabe. The story follows Dom Cobb, a skilled thief who specializes in stealing valuable information by entering people's dreams. He is given a challenging mission to plant an idea into someone's mind through a process known as inception. The movie was widely praised for its unique concept, stunning visual effects, complex storytelling, and Hans Zimmer's memorable soundtrack. It is considered one of the most innovative science fiction films of modern cinema.
+# ```json
+# {
+#   "title": "Inception",
+#   "release_year": 2010,
+#   "genre": ["science fiction", "thriller"],
+#   "director": "Christopher Nolan",
+#   "cast": [
+#     "Leonardo DiCaprio",
+#     "Joseph Gordon-Levitt",
+#     "Ellen Page",
+#     "Tom Hardy",
+#     "Ken Watanabe"
+#   ],
+#   "rating": null,
+#   "summary": "Dom Cobb, a skilled thief who specializes in stealing valuable information by entering people's dreams, is given a challenging mission to plant an idea into someone's mind through a process known as inception. The movie was widely praised for its unique concept, stunning visual effects, complex storytelling, and Hans Zimmer's memorable soundtrack. It is considered one of the most innovative science fiction films of modern cinema."
+# }
+# ```

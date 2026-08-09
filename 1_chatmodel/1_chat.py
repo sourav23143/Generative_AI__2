@@ -194,7 +194,7 @@ load_dotenv()
 
 
 
-# #Respoinse == less creative
+# #Respoinse == more creative
 
 
 

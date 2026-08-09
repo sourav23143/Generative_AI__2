@@ -175,6 +175,7 @@ final_prompt = prompt.invoke(
 
 
 response = model.invoke(final_prompt)
+#since we are able to inkove this prompt thats way this thing is known as runnable(chains)
 
 print(response.content)  
 
@@ -183,3 +184,46 @@ print(response.content)
 #PROMPT TEMPALTE USES NOT ONLY LIMITED TO THIS, LET SAY WE ARE MAKING A PROMPT WHERE WE ARE TELLING 6-7 THINGS FOR EX> NMAE, AGE, ETC.. 
 #ON THE BASIS OF THAT OUR AI IS WORKING
 #SO WE CAN USE PROMPT TEMPLATE FOR THAT ALSO AGAIN AND AGAIN
+
+
+#OUTPUT > 
+# Give your Paragraph :Inception is a mind-bending science fiction thriller directed by Christopher Nolan. Released in 2010,
+#  the film starsLeonardo DiCaprio, Joseph Gordon-Levitt, Ellen Page, Tom Hardy, and Ken Watanabe. The story follows Dom Cobb,
+#  a skilled thief who specializes in stealing valuable information by entering people's dreams. He is given a challenging mission 
+# to plant an idea into someone's mind through a process known as inception. The movie was widely praised for its unique concept, 
+# stunning visual effects, complex storytelling, and Hans Zimmer's memorable soundtrack. It is considered one of the most 
+# innovative science fiction films of modern cinema.
+
+
+# Movie Title:
+# Inception
+
+# Release Year:
+# 2010
+
+# Genre:
+# Science Fiction Thriller
+
+# Director:
+# Christopher Nolan
+
+# Main Cast:
+# Leonardo DiCaprio, Joseph Gordon-Levitt, Ellen Page, Tom Hardy, Ken Watanabe
+
+# Plot:
+# Dom Cobb, a skilled thief who steals valuable information by entering people's dreams, is tasked with planting an idea into someone's mind through a process called inception.
+
+# IMDb Rating:
+# Not Mentioned
+
+# Music Composer:
+# Hans Zimmer
+
+# Notable Features:
+# Unique concept, stunning visual effects, complex storytelling, memorable soundtrack
+
+# Recognition / Achievements:
+# Considered one of the most innovative science fiction films of modern cinema
+
+# Summary:
+# A mind-bending sci-fi thriller about a thief who extracts secrets from dreams and is challenged to plant an idea instead. Praised for itsinnovative storytelling and visuals.
