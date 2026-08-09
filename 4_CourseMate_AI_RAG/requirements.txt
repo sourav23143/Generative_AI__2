@@ -1,0 +1,72 @@
+# ==============================
+# Core LangChain
+# ==============================
+langchain
+langchain-core
+langchain-community
+langchain-text-splitters
+
+# ==============================
+# LLM Providers
+# ==============================
+langchain-openai
+openai
+
+langchain-mistralai
+mistralai
+
+# ==============================
+# Vector Database
+# ==============================
+chromadb
+langchain-chroma
+
+# ==============================
+# Embeddings / Transformers
+# ==============================
+sentence-transformers
+transformers
+torch
+
+# ==============================
+# Document Loaders
+# ==============================
+pypdf
+pymupdf
+docx2txt
+unstructured
+
+# ==============================
+# Environment Variables
+# ==============================
+python-dotenv
+
+# ==============================
+# Tokenization
+# ==============================
+tiktoken
+
+# ==============================
+# Data Handling
+# ==============================
+numpy
+pandas
+
+# ==============================
+# API / Backend
+# ==============================
+fastapi
+uvicorn
+pydantic
+python-multipart
+
+# ==============================
+# Frontend (Optional - Streamlit)
+# ==============================
+streamlit
+
+# ==============================
+# HTTP Requests
+# ==============================
+requests
+httpx
