@@ -5,7 +5,6 @@ langchain
 langchain-core
 langchain-community
 langchain-text-splitters
-
 # ==============================
 # LLM Providers
 # ==============================
@@ -24,6 +23,7 @@ langchain-chroma
 # ==============================
 # Embeddings / Transformers
 # ==============================
+langchain-huggingface
 sentence-transformers
 transformers
 torch
@@ -70,3 +70,8 @@ streamlit
 # ==============================
 requests
 httpx
+
+# ==============================
+# Retriever Integrations
+# ==============================
+arxiv
