@@ -140,8 +140,7 @@ for r in result:
 #so we have founded  2 simler searches  of " What is used for Data Analysis?" and store those in "result" and after that we will use retriver
 
 
-retriver = vectorstore.as_retriever()
-
+retriver = vectorstore.as_retriever() #if we not write any things inside .as_retriever(), then by default "SIMILARITY SEARCH STRATEGIES" used
 docs = retriver.invoke("Explain deep learning")
 
 for d in docs:
