@@ -172,13 +172,9 @@ response = model.invoke(final_prompt)
 #since we are able to inkove this prompt thats way this thing is known as runnable(chains)
 
 ##SO response = model.invoke(final_prompt) WILL GIVE MODEL RAW OUTPUTS , BUT TO GET STRUCTURED OUTPUTWE HAVE MAKE RESONSE CONTENT MORE FINE
-try:
-    movie_data = parser.parse(response.content)  #Parse the output of an LLM call to a Pydantic object.
-except OutputParserException:
-    print("The model response could not be converted into the Movie schema.")
-    print("Raw model output:")
-    print(response.content)
-    sys.exit(1)
+
+movie_data = parser.parse(response.content)  #Parse the output of an LLM call to a Pydantic object.
+
 
 # print(response.content)
 print(movie_data.model_dump_json(indent=2))  #print clean JSON output

@@ -7,6 +7,6 @@ data = WebBaseLoader(url) #creating object
 
 docs = data.load()  #structuring the object
 
-#print(len(docs))  #> 1 > as we have loaded one page only, as if we have loaded multiple pages then multiple document will be created
+# print(len(docs))  #> 1 > as we have loaded one page only, as if we have loaded multiple pages then multiple document will be created
 
 print(docs[0].page_content)
