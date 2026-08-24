@@ -87,13 +87,6 @@ while True:
 
 
 
-final_prompt = prompt_template.format_messages(data = docs)
-
-result  = model.invoke(final_prompt)
-
-print(result.content)
-
-
 # press 0 to exit
 # You :Can you tell me about the  Word2Vec framework
 

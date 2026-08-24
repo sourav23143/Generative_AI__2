@@ -53,7 +53,7 @@ llm_with_tool = llm.bind_tools([get_text_length])
 
 
 #SO TILL NOW WE HAVE CREATED THE TOOL AND BINDED THE TOOL 
-#NOW 
+#NOW  
 
 message = []
 prompt = input("You: ")
@@ -201,4 +201,13 @@ print(result.content)
 #______________________________________________________________________________________________________________________________________________________
 
 
-# BUT STILL THIS IS NOT AN AGENT, WE CAN SAY IT AS HUMAN_IN_THE LOOP, AGENT EXECUTE TOOL OWN BY ITS OWN
+# BUT STILL THIS IS NOT AN AGENT, WE CAN SAY IT AS HUMAN_IN_THE LOOP, AGENT EXECUTE TOOL OWN BY ITS OWN, BUT HERE WE ARE EXECUTING THE TOOL AS >>
+
+# if result.tool_calls:
+#     tool_name = result.tool_calls[0]["name"]
+#     tool_message = tools[tool_name].invoke(result.tool_calls[0])
+#     message.append(tool_message)
+
+
+
+#BUT AN AGENT AUTOMATICALLY EXECUTE ITS TOOLS
