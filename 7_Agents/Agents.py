@@ -110,9 +110,6 @@ def get_news(city :str) -> str:
     return f"Latest news in {city}:\n\n" + "\n\n".join(news_list)
 
 
-print(get_news.invoke({"city" : "Delhi"}))
-
-
 #OUTPUT >>
 
 # Latest news in Delhi:
@@ -161,16 +158,19 @@ llm_with_tool = llm.bind_tools([get_weather, get_news])
 
 #AGENT LOOP - VERY IMPORTANT
 
-messages = [] #if we are going to create a chatbot/agent which capture multiple things at once than. first of all we need some history to capture, so for that we use "messages"
 
 
 print("City intelligence System")
 print("type Exit to quit")
 
 while True:
+    messages = [] #if we are going to create a chatbot/agent which capture multiple things at once than. first of all we need some history to capture, so for that we use "messages"
+
     user_input = input("You : ")
     if user_input.lower() == "exit":
         break
+
+    
     messages.append(HumanMessage(content = user_input))
 
     while True:
@@ -182,4 +182,42 @@ while True:
 
         messages.append(result)
 
+        #if tool is required
+        if result.tool_calls: #it will get executed when actually we will have any tool call, if not than we can directly print result
+            tool_denied = False
+
+            for tool_call in result.tool_calls: #as there can be multiple tools
+
+                tool_name = tool_call['name']
+
+                #HUMAN IN THE LOOP
+                confirm = input(f"Agent wants to call {tool_name}, Approve (YES/NO)")
+
+                if confirm.lower() == "no":
+                    print("tool call deniend and I cannot get the latest information ")
+                    tool_denied = True
+                    break
+
+                #execute tool
+                tool_result = tools[tool_name].invoke(tool_call)
+
+                messages.append(ToolMessage(
+                    content = tool_result,
+                    tool_call_id = tool_call["id"] #as there are multiple tools
+                ))
+
+            if tool_denied:
+                break
+
+
+            continue #this will skip the else part below > go back to the top of the inner loop > call the LLM again >Because now the LLM has the tool result in messages, so it can read it and answer properly.
+        else: 
+            print("\n Final Answer:\n")
+            print(result.content) 
+            print("\n" + "="*50 + "\n")
+            break
+
+#FLOW >>>
+
+#User Input -> LLM (decide tool) -> Tool Executes -> ToolMessage added -> LOOP AGAIN -> LLM (final answer)
 
