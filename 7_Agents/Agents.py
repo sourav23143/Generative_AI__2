@@ -221,3 +221,71 @@ while True:
 
 #User Input -> LLM (decide tool) -> Tool Executes -> ToolMessage added -> LOOP AGAIN -> LLM (final answer)
 
+
+
+
+#______________________________________________________________________________________________________________________________________________________
+
+
+
+#SO THIS IS NOT ONLY WAY TO MAKE AN AI AGENT, THIS ONE IS HARD CODED BUT THERE ARE MORE WAY TO CREATE AN AGENT AUTONOMOUSLY
+
+
+
+
+# In our code, we didn’t just call an API or use an LLM separately. We created a system that could understand a user’s
+# intention, decide what action is needed, execute that action using external tools, and then use the result of that action to
+# generate a meaningful response. For example, when the user asked about weather, the LLM first analyzed the question
+# and decided that weather information is required. Then it triggered the weather tool, which fetched real-time data from
+# an API. After that, we fed that result back into the LLM, and only then the LLM generated the final answer.
+# So what we really built was not just code we built a decision-making loop where the LLM acts like a brain and the
+# tools act like hands interacting with the real world.
+# In your manual code, every single step is visible:
+# • • when the LLM is called
+# • • when a tool is triggered
+# • • what data is passed
+# • • what result comes back
+# You can literally trace the entire flow from user input to final output.
+
+# But there are some problems with this code I am not saying the code is bad actually its really good but lets
+# see some problems
+
+
+# Too Much Boilerplate Code
+# In your implementation, you had to write:
+# • • the loop
+# • • tool execution logic
+# • • message handling
+# • • condition checks
+# All of this is repetitive work.
+
+# Manual Loop Management is Error-Prone
+# You are responsible for:
+# • • when to stop the loop
+# • • when to continue
+# • • handling edge cases
+# A small mistake like:
+# • • forgetting continue
+# • • misplacing a condition
+# 👉 can break the entire agent.
+
+
+# Scaling Becomes Difficult
+# Right now you have:
+# • • 2 tools (weather + news)
+# Imagine:
+# • • 10 tools
+# • • multiple conditions
+# • • complex workflows
+# Your code will quickly become:
+# • • messy
+# • • hard to maintain
+# • • difficult to extend
+
+
+# Harder to Maintain Over Time
+# As your project grows:
+# • • more tools
+# • • more features
+# • • more logic
+# The manual loop becomes harder to manage.
